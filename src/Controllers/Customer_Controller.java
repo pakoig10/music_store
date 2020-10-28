@@ -11,9 +11,8 @@ public class Customer_Controller {
 
     public static void createRecord() throws SQLException {
         try(Connection conn = DBUtil.getConnection()) {
-            Customer customer;
-            customer = createObject();
-            ResultSet keys;
+            Customer customer = new Customer();
+            customer = Customer_View.setObject(customer);
             String sql = "INSERT INTO customer (customer_name, address, city, state, zip, phone) VALUES (?,?,?,?,?,?)";
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, customer.getCustomer_name());
@@ -24,15 +23,12 @@ public class Customer_Controller {
             stmt.setString(6, customer.getPhone());
             stmt.executeUpdate();
             System.out.println("Query executed.\n");
-            keys = stmt.getGeneratedKeys();
-            keys.next();
-            customer.setCustomer_id(keys.getInt(1));
         } catch (SQLException ex) {
             DBUtil.processException(ex);
         }
     }
 
-    public static ResultSet searchById(int id) throws SQLException {
+    private static ResultSet searchById(int id) throws SQLException {
         try {
             Connection conn = DBUtil.getConnection();
             String sql = "SELECT * FROM customer WHERE customer_id = ?;";
@@ -72,11 +68,5 @@ public class Customer_Controller {
         }catch (SQLException ex){
             DBUtil.processException(ex);
         }
-    }
-
-    private static Customer createObject() {
-        Customer customer = new Customer();
-        Customer_View.setObject(customer);
-        return customer;
     }
 }

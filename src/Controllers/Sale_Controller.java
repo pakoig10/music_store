@@ -2,20 +2,17 @@ package Controllers;
 
 import Helpers.DBUtil;
 import Helpers.InputHelper;
-import Models.Employee;
 import Models.Sale;
+import Views.Sale_View;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Sale_Controller {
 
     public static void createRecord() throws SQLException {
         try(Connection conn = DBUtil.getConnection()) {
-            Sale sale;
-            sale = createObject();
+            Sale sale = new Sale();
+            sale = Sale_View.setObject(sale);
             String sql = "INSERT INTO sales (quantity, outlet_outlet_number, product_product_code, employee_emp_number, customer_customer_id) VALUES (?, ?, ?, ?, ?);";
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, sale.getQuantity());
@@ -42,27 +39,9 @@ public class Sale_Controller {
             stmt.setInt(1, id);
             stmt.setString(2, dateTime);
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                System.out.println("Sale id: " + rs.getInt(1));
-                System.out.println("Sale date-time: " + rs.getString(2));
-                System.out.println("Quantity: " + rs.getInt(3));
-                System.out.println("Outlet number: " + rs.getInt(4));
-                System.out.println("Product code: " + rs.getInt(5));
-                System.out.println("Employee number: " + rs.getInt(6));
-                System.out.println("Customer id: " + rs.getInt(7));
-            }
+            Sale_View.resultSearchByIdDate(rs);
         }catch (SQLException ex){
             DBUtil.processException(ex);
         }
-    }
-
-    private static Sale createObject() {
-        Sale sale = new Sale();
-        sale.setQuantity(InputHelper.outputInt("Insert the quantity: "));
-        sale.setOutlet_outlet_number(InputHelper.outputInt("Insert your outlet number: "));
-        sale.setProduct_product_code(InputHelper.outputInt("Insert the product code: "));
-        sale.setEmployee_emp_number(InputHelper.outputInt("Insert the employee number: "));
-        sale.setCustomer_customer_id(InputHelper.outputInt("Insert the customer id: "));
-        return sale;
     }
 }

@@ -14,8 +14,8 @@ public class Menu_View {
         System.out.println("\nSALES/RETURNS MENU");
         System.out.println("1. Process a sale");
         System.out.println("2. Process a return");
-        System.out.println("3. View a sale (date and customer id needed)");
-        System.out.println("4. View a return (date and customer id needed)");
+        System.out.println("3. View a sale (date-time and customer id needed)");
+        System.out.println("4. View a return (date-time and customer id needed)");
         System.out.println("5. Quit");
     }
 
@@ -28,6 +28,13 @@ public class Menu_View {
         System.out.println("5. Process new shipment of products for an outlet");
         System.out.println("6. Process returns");
         System.out.println("7. Quit");
+    }
+
+    public static void crudMenu() {
+        System.out.println("1. Add");
+        System.out.println("2. Modify");
+        System.out.println("3. Drop");
+        System.out.println("4. Exit");
     }
 
     public static void reportsMenu() {

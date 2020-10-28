@@ -3,6 +3,7 @@ package Controllers;
 import Helpers.DBUtil;
 import Helpers.InputHelper;
 import Models.Inventory;
+import Views.Inventory_View;
 
 import java.sql.*;
 
@@ -10,8 +11,8 @@ public class Inventory_Controller {
 
     public static void createRecord() throws SQLException {
         try(Connection conn = DBUtil.getConnection()) {
-            Inventory inventory;
-            inventory = createObject();
+            Inventory inventory = new Inventory();
+            inventory = Inventory_View.setObject(inventory);
             String sql = "INSERT INTO inventory (quantity, outlet_outlet_number, product_product_code) VALUES (?, ?, ?);";
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, inventory.getQuantity());
@@ -22,13 +23,5 @@ public class Inventory_Controller {
         } catch (SQLException ex) {
             DBUtil.processException(ex);
         }
-    }
-
-    private static Inventory createObject() {
-        Inventory inventory = new Inventory();
-        inventory.setQuantity(InputHelper.outputInt("Insert the quantity: "));
-        inventory.setOutlet_outlet_number(InputHelper.outputInt("Insert your outlet number: "));
-        inventory.setProduct_product_code(InputHelper.outputInt("Insert the product code: "));
-        return inventory;
     }
 }

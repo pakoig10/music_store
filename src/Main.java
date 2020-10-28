@@ -11,9 +11,9 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Customer_Controller.createRecord();
-        Customer_Controller.modifyById();
-        Customer_Controller.deleteById();
+        //Customer_Controller.createRecord();
+        //Customer_Controller.modifyById();
+        //Customer_Controller.deleteById();
         //Outlet_Controller.createRecord();
         //Outlet_Controller.modifyById();
         //Outlet_Controller.deleteById();
@@ -28,6 +28,6 @@ public class Main {
         //Inventory_Controller.createRecord();
         //Return_Controller.createRecord();
         //Return_Controller.searchByIdDate();
-        //Menu_Controller.mainMenu();
+        Menu_Controller.mainMenu();
     }
 }
