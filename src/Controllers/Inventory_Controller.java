@@ -1,7 +1,6 @@
 package Controllers;
 
 import Helpers.DBUtil;
-import Helpers.InputHelper;
 import Models.Inventory;
 import Views.Inventory_View;
 

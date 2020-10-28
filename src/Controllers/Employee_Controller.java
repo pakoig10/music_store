@@ -2,7 +2,6 @@ package Controllers;
 
 import Helpers.DBUtil;
 import Helpers.InputHelper;
-import Models.Customer;
 import Models.Employee;
 import Views.Employee_View;
 

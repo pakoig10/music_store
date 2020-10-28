@@ -3,7 +3,6 @@ package Controllers;
 import Helpers.DBUtil;
 import Helpers.InputHelper;
 import Models.Return;
-import Models.Sale;
 import Views.Return_View;
 
 import java.sql.*;

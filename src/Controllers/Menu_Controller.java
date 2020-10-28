@@ -1,8 +1,5 @@
 package Controllers;
 
-import Models.Customer;
-import Models.Employee;
-import Models.Product;
 import Views.Menu_View;
 
 import java.sql.SQLException;
@@ -54,6 +51,7 @@ public class Menu_Controller {
                 case 2: crudMenu("Employee"); break;
                 case 3: crudMenu("Customer"); break;
                 case 4: crudMenu("Product"); break;
+                case 5: Inventory_Controller.createRecord(); break;
             }
         }
     }
@@ -105,12 +103,14 @@ public class Menu_Controller {
     private static void reportsMenu() {
         int answer = 0;
         Scanner scan = new Scanner(System.in);
-        Menu_View.reportsMenu();
         while(answer != 4) {
+            Menu_View.reportsMenu();
             System.out.print("Insert the option: ");
             answer = scan.nextInt();
             switch (answer){
-                case 4: break;
+                case 1: Report_Controller.salesReportForOutlet();break;
+                case 2: Report_Controller.salesReportForEmployee();break;
+                case 3: Report_Controller.listTopSellingItems(10);break;
             }
         }
     }
